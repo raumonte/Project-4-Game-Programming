@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody;
     private SpriteRenderer sprite;
     private Animator animationPlayer;
+    public Vector3 checkpoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,13 +59,17 @@ public class Player : MonoBehaviour
     {
         if (otherObject.gameObject.CompareTag("Enemy"))
         {
-            Destroy(this.gameObject);
-            SceneManager.LoadScene("Game_Over");
+            GameManager.instance.PlayerDeath();
+           // SceneManager.LoadScene("Game_Over");
         }
         if (otherObject.gameObject.CompareTag("Doorway"))
         {
             Destroy(this.gameObject);
             SceneManager.LoadScene("Victory");
+        }
+        if (otherObject.gameObject.CompareTag("Checkpoint"))
+        {
+            GameManager.instance.checkpoint = transform.position;
         }
     }
     void Jump()

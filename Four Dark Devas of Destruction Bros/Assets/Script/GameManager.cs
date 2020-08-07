@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int currentSceneIndex = 0 ;
+    public int playerLives;
+    public int startLives;
+    public Vector3 checkpoint;
+    public GameObject playerPf;
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;   
@@ -27,9 +31,23 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        checkpoint = new Vector3(0, 0, 0);
+        instance.playerLives = instance.startLives;
     }
-   public void LoadLevel(int levelIndex)
+    public void PlayerDeath()
+    {
+        if (playerLives > 0)
+        {
+            playerLives -= 1;
+            Destroy(playerPf);
+            Instantiate(playerPf, checkpoint, playerPf.transform.rotation);
+        }
+        else
+        {
+            SceneManager.LoadScene("Game_over");
+        }
+    }
+    public void LoadLevel(int levelIndex)
     {
         SceneManager.LoadScene(levelIndex);
     }

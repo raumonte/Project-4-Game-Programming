@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -50,6 +51,19 @@ public class Player : MonoBehaviour
             {
                 Jump();
             }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D otherObject)
+    {
+        if (otherObject.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(this.gameObject);
+            SceneManager.LoadScene("Game_Over");
+        }
+        if (otherObject.gameObject.CompareTag("Doorway"))
+        {
+            Destroy(this.gameObject);
+            SceneManager.LoadScene("Victory");
         }
     }
     void Jump()

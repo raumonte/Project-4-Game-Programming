@@ -10,7 +10,10 @@ public class GameManager : MonoBehaviour
     public int playerLives;
     public int startLives;
     public Vector3 checkpoint;
-    public GameObject playerPf;
+    public GameObject playerPf;                     //the prefab to instantiate again updon player death
+
+    [HideInInspector]
+    public GameObject currentPlayerPawn;            //the current player character in the scene
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;   
@@ -39,7 +42,7 @@ public class GameManager : MonoBehaviour
         if (playerLives > 0)
         {
             playerLives -= 1;
-            Destroy(playerPf);
+            Destroy(currentPlayerPawn);
             Instantiate(playerPf, checkpoint, playerPf.transform.rotation);
         }
         else

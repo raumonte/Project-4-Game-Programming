@@ -21,7 +21,11 @@ public class Player : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         animationPlayer = GetComponent<Animator>();
-        currentJumps = maxJumps;
+        currentJumps = maxJumps;        
+
+        //Set this object as the current player pawn in the scene
+        GameManager.instance.currentPlayerPawn = this.gameObject;
+
     }
 
     // Update is called once per frame
@@ -67,6 +71,11 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
             SceneManager.LoadScene("Victory");
         }
+                        
+    }
+
+    private void OnTriggerEnter2D(Collider2D otherObject)
+    {
         if (otherObject.gameObject.CompareTag("Checkpoint"))
         {
             GameManager.instance.checkpoint = transform.position;
@@ -82,5 +91,6 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D hitinfo = Physics2D.Raycast(transform.position, Vector2.down, (height /2f) + 0.1f );
         return (hitinfo.collider != null);
-    } 
+    }
+
 }

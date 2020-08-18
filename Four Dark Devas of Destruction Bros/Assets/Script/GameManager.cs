@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameManager : MonoBehaviour
     // This has the checkpoint set a s a vector 3 to get the location of where it is.
     public Vector3 checkpoint;
     public GameObject playerPf;                     //the prefab to instantiate again updon player death
+    public int playerPoint;
+    public Text pointCounter;
+    public Text lifeCounter;
 
     [HideInInspector]
     public GameObject currentPlayerPawn;            //the current player character in the scene
@@ -45,6 +49,7 @@ public class GameManager : MonoBehaviour
         checkpoint = new Vector3(0, 0, 0);
         //when the game starts it sets the amount of playeer lives that the designer put in to the editor.
         instance.playerLives = instance.startLives;
+
     }
     public void PlayerDeath()
     {
@@ -54,6 +59,7 @@ public class GameManager : MonoBehaviour
             playerLives -= 1;
             Destroy(currentPlayerPawn);
             Instantiate(playerPf, checkpoint, playerPf.transform.rotation);
+            lifeCounter.text = "Lives Left: 0" + playerLives.ToString();
         }
         //If the amount of lives reach under zero that is when the Game Over scene loads in.
         else
@@ -76,6 +82,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("scene finished loading");
         currentSceneIndex = scene.buildIndex;
+        lifeCounter.text = "Lives Left: 0" + playerLives.ToString();
     }
     //This function helps to load the scene by getting the scene index and adding 1 to go into the next of the build index.
     public void LoadNextScene()
@@ -87,19 +94,16 @@ public class GameManager : MonoBehaviour
     {
         LoadLevel(currentSceneIndex - 1);
     }
-    
-    // Update is called once per frame
-    void Update()
+    public void Victory()
     {
-        //This was used to go to the next scene using the arrow key.
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (playerPoint == 400)
         {
-            LoadNextScene();
+            LoadLevel("Victory");
         }
-        //This if statement is used to the 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            LoadPreviousScene();
-        }
+        pointCounter.text ="Points: " + playerPoint.ToString();
+    }
+// Update is called once per frame
+void Update()
+    {
     }
 }

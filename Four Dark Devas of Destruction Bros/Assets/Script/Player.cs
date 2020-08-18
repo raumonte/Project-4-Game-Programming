@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private Animator animationPlayer;
     //this has the location of the checkpoint
     public Vector3 checkpoint;
-
+    public AudioClip enemyLaugh;
     // Start is called before the first frame update
     void Start()
     {
@@ -82,14 +82,10 @@ public class Player : MonoBehaviour
         if (otherObject.gameObject.CompareTag("Enemy"))
         {
             GameManager.instance.PlayerDeath();
+            AudioSource.PlayClipAtPoint(enemyLaugh, transform.position);
         }
         //Once the player collides with what is labeled as doorway. It will load the scene Victory.
-        if (otherObject.gameObject.CompareTag("Doorway"))
-        {
-            Destroy(this.gameObject);
-            SceneManager.LoadScene("Victory");
-        }
-                        
+               
     }
 
     private void OnTriggerEnter2D(Collider2D otherObject)

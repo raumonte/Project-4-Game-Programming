@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
+    private AudioSource buttonAudio;
+    public AudioClip playButton;
     // Start is called before the first frame update
     void Start()
     {
-        
+        buttonAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,6 +27,12 @@ public class ButtonManager : MonoBehaviour
     //This is a bit of a test to add into buttons for when click. But this void is for moving to another 
     public void LoadNextScene()
     {
+        Debug.Log("Hello");
         GameManager.instance.LoadLevel (GameManager.instance.currentSceneIndex + 1);
+    }
+    public void PlayButtonSelect()
+    {
+        buttonAudio.clip = playButton;
+        buttonAudio.Play();
     }
 }

@@ -24,9 +24,4 @@ public class AudioManager : MonoBehaviour
         }
     }
     //This is for the button for when the player clicks the button that it plays the sound.
-    public void PlayButtonSelect()
-    {
-        audioSource.clip = playButton;
-        audioSource.Play();
-    }
 }

@@ -145,10 +145,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 5
   currentJumps: 0
-  maxJumps: 2
+  maxJumps: 5
   speed: 90
   height: 0.65
   checkpoint: {x: 0, y: 0, z: 0}
+  enemyLaugh: {fileID: 8300000, guid: da3b91adf44319e4591a039e4ed6ecb4, type: 3}
 --- !u!95 &322588069
 Animator:
   serializedVersion: 3

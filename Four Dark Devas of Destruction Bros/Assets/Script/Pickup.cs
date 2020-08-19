@@ -15,11 +15,6 @@ public class Pickup: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pointValue == 200)
-        {
-            Debug.Log("200 points acheived");
-            GameManager.instance.LoadLevel("Victory");
-        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

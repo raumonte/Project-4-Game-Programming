@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         //When there is more than one instance of a game manager it will delete the second one and 
         else
         {
-            Debug.LogError("[GameManager] Attempted to create a second  instance of GameManager");
+            Debug.Log("[GameManager] Attempted to create a second  instance of GameManager");
             Destroy(this);
         }
     }
